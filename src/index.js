@@ -1,6 +1,6 @@
 
 
-const DEFAULT_ROOT = __dirname + "/./../";
+const DEFAULT_ROOT = __dirname + "/./../../../configs";
 
 function isObject (item) {
   return (typeof item === "object" && !Array.isArray(item) && item !== null);
@@ -29,9 +29,16 @@ const resolveEnvValue = (evalue)=>{
 
 const resolveConfig = (conf)=>{
   return Object.keys(conf).map((v)=>{
-    const keys = /^@(.*)/.exec(v);
+    const envs = /^@(.*)/.exec(v);
+    const cenvs = /^@(.*?):([^:]*)/.exec(v);
     const value = (isObject(conf[v]))?resolveConfig(conf[v]):conf[v];
-    return {[(keys&&keys[1])?keys[1]:v]:(keys&&keys[1])?(resolveEnvValue(process.env[keys[1].toUpperCase()])||value):value};
+    if(cenvs && cenvs[1] && cenvs[2]){
+      return {[cenvs[1]]:(process.env[cenvs[2].toUpperCase()]||value)}; 
+    }else if(envs && envs[1]){
+      return {[envs[1]]:(process.env[envs[1].toUpperCase()]||value)};
+    }else{
+      return {[v]:value};
+    }
   }).reduce((acc,curr)=>{
     return {...acc,...curr};
   },{});
@@ -49,7 +56,7 @@ const readDevelopment = (dir)=>{
   return requireWithDefault(dir+"/./development.js",{});
 };
 
-module.exports = function({dir = DEFAULT_ROOT} = requireWithDefault(process.env.PWD+'/./.config',{})){
+module.exports = function({dir = DEFAULT_ROOT} = {}){
   return resolveConfig(
     mergeConfigs(
       readCommon(dir),

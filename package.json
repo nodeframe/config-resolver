@@ -1,8 +1,8 @@
 {
-  "name": "config-resolver",
-  "version": "1.0.0",
+  "name": "nfs-config-resolver",
+  "version": "1.0.5",
   "description": "",
-  "main": "index.js",
+  "main": "libs/index.js",
   "scripts": {
     "build": "rm -rf libs/** && node_modules/.bin/babel src/ -d libs -s",
     "start": "node_modules/.bin/nodemon src/index.js --watch src --exec 'node_modules/.bin/eslint src && node_modules/.bin/babel-node'",
@@ -12,7 +12,7 @@
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.14.0",
-    "babel-core": "^6.14.0",
+    "babel-core": "^6.18.0",
     "babel-eslint": "^6.1.2",
     "babel-plugin-module-resolver": "^2.2.0",
     "babel-plugin-transform-async-to-generator": "^6.8.0",
@@ -31,6 +31,7 @@
     "sinon": "^1.17.5"
   },
   "dependencies": {
-    "babel-core": "^6.18.2"
+    "parents": "^1.0.1",
+    "path": "^0.12.7"
   }
 }

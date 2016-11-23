@@ -1,7 +1,7 @@
 
 module.exports = {
   "@a":"aValue",
-  "b":"bValue",
+  "@b:Z":"bValue",
   "c":{
     "@k":"kValue",
     "@d":{
@@ -9,3 +9,5 @@ module.exports = {
     }
   }
 };
+
+

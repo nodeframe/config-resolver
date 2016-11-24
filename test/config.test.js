@@ -78,3 +78,59 @@ describe("Config",()=>{
     expect(conf1).toEqual({ a: 'aValue', b: 'bValue', c: { d: { e: 'eValue' }, k: 'kValue', x: [ { xa: '1' }, { xb: 'xbValue' } ] } });
   });
 });
+
+
+describe("Mail Configuration",()=>{
+  it("should render correctly",()=>{
+    const conf4 = config({
+      dir:__dirname+'/./configs.4'
+    });
+    expect(conf4).toEqual({
+       "senecaLog": {
+        "log": "silent"
+       },
+       "ses": {
+        "accessKeyId": "AKIAJBWPV6JLOJCUMTAA",
+        "secretAccessKey": "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",
+        "region": "us-west-2"
+       },
+       "redisMQ": {
+        "host": "127.0.0.1",
+        "port": "6379",
+        "ns": "rsmq"
+       },
+       "transports": {
+        "listenings": [
+         {
+          "type": "tcp",
+          "pins": [
+           {
+            "role": "MAIL",
+            "cmd": "*"
+           }
+          ]
+         },
+         {
+          "type": "amqp",
+          "pins": [
+           {
+            "role": "MAIL",
+            "cmd": "QUEUE"
+           },
+           {
+            "role": "MAIL",
+            "cmd": "TEST"
+           }
+          ],
+          "url": "amqp://guest:guest@128.199.105.153:5672"
+         }
+        ]
+       },
+       "send_actual_mail": "true",
+       "host": "http://www.rentspree.com",
+       "spawn": {
+        "stdio": "ignore"
+       }
+      });
+  });
+})

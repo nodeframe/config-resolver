@@ -1,0 +1,36 @@
+module.exports = {
+  senecaLog:{
+    log:'silent'
+  },
+  ses:{
+    "@accessKeyId:AMAZON_SES_ACCESS_KEY_ID": 'AKIAJBWPV6JLOJCUMTAA',
+    "@secretAccessKey:AMAZON_SES_SECRET_KEY": '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',
+    "@region:AMAZON_SES_REGION":'us-west-2'
+  },
+  redisMQ:{
+    "@host:REDISMQ_HOST": "127.0.0.1",
+    "@port:REDISMQ_PORT": "6379",
+    "@ns:REDISMQ_NAMESPACE": "rsmq"
+  },
+  transports:{
+    listenings:[
+      {
+        type:'tcp',
+        pins: [
+          { role: 'MAIL', cmd:'*'}
+        ]
+      },
+      {
+        type: 'amqp',
+        pins: [
+          { role: 'MAIL', cmd: 'QUEUE' },
+          { role: 'MAIL', cmd: 'TEST' }
+        ],
+        "@url:AMQP_URL":'amqp://guest:guest@128.199.105.153:5672'
+      }
+    ]
+  },
+  "@send_actual_mail:SEND_MAIL": "true",
+  "@host:HOST": 'http://www.rentspree.com',
+  spawn: { "@stdio": "ignore" }
+};

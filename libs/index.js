@@ -11,6 +11,9 @@ var DEFAULT_ROOT = __dirname + "/./../../../configs";
 function isObject(item) {
   return (typeof item === "undefined" ? "undefined" : _typeof(item)) === "object" && !Array.isArray(item) && item !== null;
 }
+function isArray(item) {
+  return Array.isArray(item);
+}
 
 var requireWithDefault = function requireWithDefault(path) {
   var default_require = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -32,16 +35,13 @@ var mergeConfigs = function mergeConfigs() {
   }, {});
 };
 
-var resolveEnvValue = function resolveEnvValue(evalue) {
-  if (evalue == "TRUE" || evalue == "true") return true;else if (evalue == "FALSE" || evalue == "false") return false;else if (!isNaN(+evalue)) return +evalue;
-  return evalue;
-};
-
 var resolveConfig = function resolveConfig(conf) {
   return Object.keys(conf).map(function (v) {
     var envs = /^@(.*)/.exec(v);
     var cenvs = /^@(.*?):([^:]*)/.exec(v);
-    var value = isObject(conf[v]) ? resolveConfig(conf[v]) : conf[v];
+    var value = isObject(conf[v]) ? resolveConfig(conf[v]) : isArray(conf[v]) ? conf[v].map(function (cf) {
+      return resolveConfig(cf);
+    }) : conf[v];
     if (cenvs && cenvs[1] && cenvs[2]) {
       return _defineProperty({}, cenvs[1], process.env[cenvs[2].toUpperCase()] || value);
     } else if (envs && envs[1]) {

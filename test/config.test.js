@@ -12,6 +12,7 @@ describe("Config",()=>{
     delete process.env.E;
     delete process.env.K;
     delete process.env.Z;
+    delete process.env.XA;
   });
 
   it('should be work correctly',()=>{
@@ -22,7 +23,7 @@ describe("Config",()=>{
     const conf2 = config({
       dir:__dirname+'/./configs.2'
     });
-    expect(conf1).toEqual({ a: 'aValue', b: 'bValue', c: { d: { e: 'eValue' }, k: 'kValue' } });
+    expect(conf1).toEqual({ a: 'aValue', b: 'bValue', c: { d: { e: 'eValue' }, k: 'kValue', x: [ { xa: 'xaValue' }, { xb: 'xbValue' } ] } });
     expect(conf2).toEqual({ a: 'aValue', b: 'bdValue', c: { d: { e: 'eValue' }, k: 'kValue' }, f: 'fdValue', g: 'gdValue' });
 
   });
@@ -40,7 +41,7 @@ describe("Config",()=>{
     const conf1 = config({
       dir:__dirname+'/./configs.1'
     });
-    expect(conf1).toEqual({ a: "1", b: 'bValue', c: { d: { e: 'eValue' }, k: 'kValue' } });
+    expect(conf1).toEqual({ a: "1", b: 'bValue', c: { d: { e: 'eValue' }, k: 'kValue', x: [ { xa: 'xaValue' }, { xb: 'xbValue' } ] } });
   });
 
   it("should be overriden with environment K",()=>{
@@ -48,7 +49,7 @@ describe("Config",()=>{
     const conf1 = config({
       dir:__dirname+'/./configs.1'
     });
-    expect(conf1).toEqual({ a: 'aValue', b: 'bValue', c: { d: { e: 'eValue' }, k: "3" } });
+    expect(conf1).toEqual({ a: 'aValue', b: 'bValue', c: { d: { e: 'eValue' }, k: "3" , x: [ { xa: 'xaValue' }, { xb: 'xbValue' } ] } });
   });
 
   it("should be overriden with environment Z",()=>{
@@ -56,7 +57,7 @@ describe("Config",()=>{
     const conf1 = config({
       dir:__dirname+'/./configs.1'
     });
-    expect(conf1).toEqual({ a: 'aValue', b: '3', c: { d: { e: 'eValue' }, k: "kValue" } });
+    expect(conf1).toEqual({ a: 'aValue', b: '3', c: { d: { e: 'eValue' }, k: "kValue", x: [ { xa: 'xaValue' }, { xb: 'xbValue' } ]  } });
   });
 
   it("should be overriden with environment A K D",()=>{
@@ -66,6 +67,14 @@ describe("Config",()=>{
     const conf1 = config({
       dir:__dirname+'/./configs.1'
     });
-    expect(conf1).toEqual({ a: "1", b: 'bValue', c: { k: "3", d: "4" } });
+    expect(conf1).toEqual({ a: '1', b: 'bValue', c: { d: '4', k: '3', x: [ { xa: 'xaValue' }, { xb: 'xbValue' } ] } });
+  });
+
+  it("should be overriden with environment XA",()=>{
+    process.env.XA = "1";
+    const conf1 = config({
+      dir:__dirname+'/./configs.1'
+    });
+    expect(conf1).toEqual({ a: 'aValue', b: 'bValue', c: { d: { e: 'eValue' }, k: 'kValue', x: [ { xa: '1' }, { xb: 'xbValue' } ] } });
   });
 });

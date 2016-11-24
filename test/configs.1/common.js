@@ -6,7 +6,11 @@ module.exports = {
     "@k":"kValue",
     "@d":{
       "e":"eValue"
-    }
+    },
+    "x":[
+    	{"@xa":"xaValue"},
+    	{"xb":"xbValue"}
+    ]
   }
 };
 

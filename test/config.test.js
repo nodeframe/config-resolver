@@ -24,8 +24,7 @@ describe("Config",()=>{
       dir:__dirname+'/./configs.2'
     });
     expect(conf1).toEqual({ a: 'aValue', b: 'bValue', c: { d: { e: 'eValue' }, k: 'kValue', x: [ { xa: 'xaValue' }, { xb: 'xbValue' } ] } });
-    expect(conf2).toEqual({ a: 'aValue', b: 'bdValue', c: { d: { e: 'eValue' }, k: 'kValue' }, f: 'fdValue', g: 'gdValue' });
-
+    expect(conf2).toEqual({ a: 'aValue', b: 'bdValue', c: { d: { e: 'eValue' }, k: 'kValue' }, f: 'fdValue', g: 'gdValue', m: { n: 'n2Value', p: 'pValue', q: 'qValue' } });
   });
 
   it('should be able to use as production',()=>{

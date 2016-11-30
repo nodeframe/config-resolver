@@ -1,4 +1,5 @@
 
+import merge from 'deepmerge';
 
 const DEFAULT_ROOT = __dirname + "/./../../../configs";
 
@@ -18,9 +19,7 @@ const requireWithDefault = (path,default_require={})=>{
 }
 
 const mergeConfigs = (...confs)=>{
-  return confs.reduce((acc,curr)=>{
-    return Object.assign(acc,curr);
-  },{});
+  return merge(...confs);
 };
 
 const resolveConfig = (conf)=>{

@@ -31,6 +31,7 @@
     "sinon": "^1.17.5"
   },
   "dependencies": {
+    "deepmerge": "^1.3.0",
     "nfs-config-resolver": "^1.0.5",
     "parents": "^1.0.1",
     "path": "^0.12.7"

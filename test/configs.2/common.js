@@ -1,4 +1,3 @@
-
 module.exports = {
   "@a":"aValue",
   "b":"bValue",
@@ -7,5 +6,9 @@ module.exports = {
     "@d":{
       "e":"eValue"
     }
+  },
+  "m":{
+  	"n":"nValue",
+  	"p":"pValue"
   }
 };

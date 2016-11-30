@@ -4,6 +4,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+var _deepmerge = require("deepmerge");
+
+var _deepmerge2 = _interopRequireDefault(_deepmerge);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var DEFAULT_ROOT = __dirname + "/./../../../configs";
@@ -26,13 +32,7 @@ var requireWithDefault = function requireWithDefault(path) {
 };
 
 var mergeConfigs = function mergeConfigs() {
-  for (var _len = arguments.length, confs = Array(_len), _key = 0; _key < _len; _key++) {
-    confs[_key] = arguments[_key];
-  }
-
-  return confs.reduce(function (acc, curr) {
-    return Object.assign(acc, curr);
-  }, {});
+  return _deepmerge2.default.apply(undefined, arguments);
 };
 
 var resolveConfig = function resolveConfig(conf) {

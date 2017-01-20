@@ -76,6 +76,40 @@ describe("Config",()=>{
     });
     expect(conf1).toEqual({ a: 'aValue', b: 'bValue', c: { d: { e: 'eValue' }, k: 'kValue', x: [ { xa: '1' }, { xb: 'xbValue' } ] } });
   });
+
+  it("should be able to merge undefined with string correctly" , ()=>{
+    process.env.NODE_ENV = "production"
+    const conf1 = config({
+      dir: __dirname+'/./configs.5'
+    });
+    expect(conf1).toEqual({
+      database: {
+        "host": "localhost",
+        "db_user": "",
+        "db_password": "",
+        "collection": "col",
+        "port": "27017"
+      },
+      elastic: {
+        "host": "http://elastic.mysite.com:9200/"
+      },
+      transports:{
+        listenings:[
+          {
+            type: 'amqp',
+            port: '8003',
+            host: 'localhost',
+            timeout: 30000,
+            pins: [
+              { role: 'property', cmd: '*' }
+            ],
+            "url": 'amqp://guest:guest@amqpSite:5672'
+          }
+        ],
+        uses: ["seneca-amqp-transport"]
+      },
+    })
+  })
 });
 
 

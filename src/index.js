@@ -23,15 +23,16 @@ const mergeConfigs = (...confs)=>{
 };
 
 const resolveConfig = (conf)=>{
+  if(typeof conf !== 'object') {return conf}
   return Object.keys(conf).map((v)=>{
     const envs = /^@(.*)/.exec(v);
     const cenvs = /^@(.*?):([^:]*)/.exec(v);
-    const value = (isObject(conf[v]))? 
-      resolveConfig(conf[v]): 
+    const value = (isObject(conf[v]))?
+      resolveConfig(conf[v]):
       (isArray(conf[v]))?conf[v].map((cf)=>resolveConfig(cf))
       :conf[v];
     if(cenvs && cenvs[1] && cenvs[2]){
-      return {[cenvs[1]]:(process.env[cenvs[2].toUpperCase()]||value)}; 
+      return {[cenvs[1]]:(process.env[cenvs[2].toUpperCase()]||value)};
     }else if(envs && envs[1]){
       return {[envs[1]]:(process.env[envs[1].toUpperCase()]||value)};
     }else{

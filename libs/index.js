@@ -36,6 +36,9 @@ var mergeConfigs = function mergeConfigs() {
 };
 
 var resolveConfig = function resolveConfig(conf) {
+  if ((typeof conf === "undefined" ? "undefined" : _typeof(conf)) !== 'object') {
+    return conf;
+  }
   return Object.keys(conf).map(function (v) {
     var envs = /^@(.*)/.exec(v);
     var cenvs = /^@(.*?):([^:]*)/.exec(v);

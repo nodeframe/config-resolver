@@ -69,11 +69,26 @@ var readDevelopment = function readDevelopment(dir) {
   return requireWithDefault(dir + "/./development.js", {});
 };
 
+var read = function read(dir, env) {
+  try {
+    return require(dir + "/./" + env + ".js");
+  } catch (e) {
+    return readDevelopment(dir);
+  }
+};
+
 module.exports = function () {
   var _ref4 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
       _ref4$dir = _ref4.dir,
       dir = _ref4$dir === undefined ? DEFAULT_ROOT : _ref4$dir;
 
-  return resolveConfig(mergeConfigs(readCommon(dir), process.env.NODE_ENV === "production" ? readProduction(dir) : readDevelopment(dir)));
+  var file = void 0;
+  if (process.env.NODE_ENV === 'production') {
+    file = readProduction(dir);
+  } else {
+    file = read(dir, process.env.NODE_ENV);
+  }
+
+  return resolveConfig(mergeConfigs(readCommon(dir), file));
 };
 //# sourceMappingURL=index.js.map

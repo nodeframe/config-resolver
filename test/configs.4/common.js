@@ -3,8 +3,8 @@ module.exports = {
     log:'silent'
   },
   ses:{
-    "@accessKeyId:AMAZON_SES_ACCESS_KEY_ID": 'AKIAJBWPV6JLOJCUMTAA',
-    "@secretAccessKey:AMAZON_SES_SECRET_KEY": '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',
+    "@accessKeyId:AMAZON_SES_ACCESS_KEY_ID": 'cccaaa',
+    "@secretAccessKey:AMAZON_SES_SECRET_KEY": 'xxxyyy',
     "@region:AMAZON_SES_REGION":'us-west-2'
   },
   redisMQ:{

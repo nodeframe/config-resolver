@@ -55,12 +55,23 @@ const readDevelopment = (dir)=>{
   return requireWithDefault(dir+"/./development.js",{});
 };
 
+const read = (dir, env) => {
+  try{
+    return require(dir + "/./" + env + ".js");
+  }catch(e){
+    return readDevelopment(dir);
+  }
+}
+
 module.exports = function({dir = DEFAULT_ROOT} = {}){
+  let file
+  if (process.env.NODE_ENV === 'production') {
+    file = readProduction(dir)
+  } else {
+    file = read(dir, process.env.NODE_ENV)
+  }
+
   return resolveConfig(
-    mergeConfigs(
-      readCommon(dir),
-      (process.env.NODE_ENV==="production")?
-        readProduction(dir):readDevelopment(dir)
-    )
+    mergeConfigs(readCommon(dir),file)
   );
 };

@@ -110,6 +110,22 @@ describe("Config",()=>{
       },
     })
   })
+
+  it('should be able to merge custom environment', () => {
+    process.env.NODE_ENV = "custom"
+    const conf1 = config({
+      dir: __dirname+'/./configs.6'
+    });
+    expect(conf1.overriden).toEqual('yes')
+  })
+
+  it('should be able to load common configs on unknown custom environment', () => {
+    process.env.NODE_ENV = 'unknown-whatever'
+    const conf1 = config({
+      dir: __dirname+'/./configs.6'
+    });
+    expect(conf1.overriden).toEqual('no')
+  })
 });
 
 
@@ -123,8 +139,8 @@ describe("Mail Configuration",()=>{
         "log": "silent"
        },
        "ses": {
-        "accessKeyId": "AKIAJBWPV6JLOJCUMTAA",
-        "secretAccessKey": "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",
+        "accessKeyId": "cccaaa",
+        "secretAccessKey": "xxxyyy",
         "region": "us-west-2"
        },
        "redisMQ": {

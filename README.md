@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/nodeframe/config-resolver.svg?branch=master)](https://travis-ci.org/nodeframe/config-resolver)
 
+[![npm](https://img.shields.io/npm/v/nfs-config-resolver.svg)](https://www.npmjs.com/package/nfs-config-resolver)
+
 # config-resolver
 
 An environment base config resolver that will reduce your worries about config and environments! Have a development environment and the production where you need it to be different config? fine! config-resolver will solve it! Have a config you want to declare only once and share on all environments? fine! config-resolver got you covered!

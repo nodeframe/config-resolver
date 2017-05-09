@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.org/nodeframe/config-resolver.svg?branch=master)](https://travis-ci.org/nodeframe/config-resolver)
-
-[![npm](https://img.shields.io/npm/v/nfs-config-resolver.svg)](https://www.npmjs.com/package/nfs-config-resolver)
+[![Build Status](https://travis-ci.org/nodeframe/config-resolver.svg?branch=master)](https://travis-ci.org/nodeframe/config-resolver) [![npm](https://img.shields.io/npm/v/nfs-config-resolver.svg)](https://www.npmjs.com/package/nfs-config-resolver)
 
 # config-resolver
 

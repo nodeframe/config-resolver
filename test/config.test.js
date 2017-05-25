@@ -126,6 +126,18 @@ describe("Config",()=>{
     });
     expect(conf1.overriden).toEqual('no')
   })
+
+  it('should be able to throw an error', () => {
+    process.env.NODE_ENV = "production"
+    try{
+      const conf1 = config({
+        dir: __dirname+'/./configs.7'
+      });
+    }catch(e){
+      expect(/Unexpected token/.test(e.message)).toBe(true)
+    }
+  })
+
 });
 
 

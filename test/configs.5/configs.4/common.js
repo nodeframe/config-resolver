@@ -1,4 +1,3 @@
-
 module.exports = {
   senecaLog:{
     log:'silent'

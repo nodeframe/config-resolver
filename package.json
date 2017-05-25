@@ -1,5 +1,5 @@
 {
-  "name": "nfs-config-resolver",
+  "name": "@nodeframe/config-resolver",
   "version": "2.0.4",
   "description": "",
   "main": "libs/index.js",

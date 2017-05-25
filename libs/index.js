@@ -27,7 +27,7 @@ var requireWithDefault = function requireWithDefault(path) {
   try {
     return require(path);
   } catch (e) {
-    return default_require;
+    if (e.code === "MODULE_NOT_FOUND") return default_require;else throw e;
   }
 };
 
